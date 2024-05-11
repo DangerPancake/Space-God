@@ -1,0 +1,63 @@
+// Explore 1st Trial of the God of Space
+    public void exploreGodOfSpaceTrial() {
+        // Dungeon exploration
+        slowPrint("Exploring the 1st Trial of the God of Space...\n");
+        wait(1000);
+        // Monster encounters (Manually set monster stats)
+        Monster[] monsters = {
+            new Monster("Placeholder", 0, 3, 1),
+            new Monster("Placeholder", 0, 3, 2),
+            new Monster("Placeholder", 0, 3, 3)
+        };
+        for (Monster monster : monsters) {
+            clearScreen();
+            while (monster.getHealth() > 0 && hp > 0) {
+                System.out.print("You are being attacked by a " + monster.getName() + "!\n");
+                // Player actions
+                System.out.print("-----------------------------------------\n");
+                System.out.print("Your HP: " + hp + "/" + maxHp + "\n");
+                System.out.print("Your Mana: " + mana + "/" + maxMana + "\n");
+                System.out.print("-----------------------------------------\n");
+                System.out.print("1. Spells\n");
+                System.out.print("2. Flee\n");
+                int playerChoice = getUserChoice(1, 2);
+                switch (playerChoice) {
+                    case 1:
+                        castSpell(monster);
+                        break;
+                    case 2:
+                        // Flee with 30% chance of success
+                        if (random.nextInt(100) < 30) {
+                            slowPrint("You successfully fled from " + monster.getName() + "!\n");
+                            return;
+                        } else {
+                            slowPrint("You failed to flee!\n");
+                        }
+                        break;
+                }
+                // Monster actions
+                monsterAttack(monster);
+            }
+             // Monster defeated
+        if (monster.getHealth() <= 0) {
+            slowPrint("You defeated " + monster.getName() + "!\n");
+            int lifeEssenceDrop = monster.getLifeEssenceDrop();
+            lifeEssence += lifeEssenceDrop;
+            slowPrint("You received " + lifeEssenceDrop + " Life Essence!\n");
+            wait(1000);
+            clearScreen();
+        }
+        }
+        // After defeating all monsters
+        slowPrint("You cleared the 1st Trial of the God of Space!\n");
+        slowPrint("Press any key to continue...\n");
+        scanner.nextLine(); // Wait for any key press
+        wait(1000);
+        clearScreen();
+        // Unlock the option to pray to the God of Space
+        slowPrint("You feel a connection with the God of Space...\n");
+        slowPrint("The option to pray to the God of Space is now unlocked!\n");
+        godOfSpaceUnlocked = true;
+
+        wait(2000);
+    }

@@ -1,0 +1,13 @@
+Name
+description (not implemented)
+description
+description
+room type (1/2) say this is type 1
+Monster Name
+Health 
+Damage 
+Drops
+room type (1/2) say 2 this time
+Room Name
+description
+"end" literally type end

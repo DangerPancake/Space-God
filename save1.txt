@@ -1,0 +1,12 @@
+steve
+3
+10
+0
+10
+3
+0
+0
+1
+Firebolt
+Healing Light
+Lesser Focus
