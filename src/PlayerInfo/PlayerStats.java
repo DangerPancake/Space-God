@@ -1,3 +1,4 @@
+package PlayerInfo;
 public class PlayerStats {
     public static String playerName;
     public static int hp = 10;

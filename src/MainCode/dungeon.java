@@ -1,3 +1,6 @@
+package MainCode;
+import PlayerInfo.PlayerStats;
+
 public class dungeon {
 
 
@@ -25,8 +28,8 @@ public class dungeon {
             System.out.print("You are being attacked by a " + monster.getName() + "!\n");
             // Player actions
             System.out.print("-----------------------------------------\n");
-            System.out.print("Your HP: " + PlayerStats.hp + "/" + PlayerStats.maxHp + "\n");
-            System.out.print("Your Mana: " + PlayerStats.mana + "/" + PlayerStats.maxMana + "\n");
+            System.out.print("HP: "+ Color.ANSI_RED + PlayerStats.hp + Color.ANSI_RESET + "/" + Color.ANSI_RED + PlayerStats.maxHp + Color.ANSI_RESET + "\n");
+            System.out.print("MP: "+ Color.ANSI_BLUE + PlayerStats.mana + Color.ANSI_RESET + "/" + Color.ANSI_BLUE + PlayerStats.maxMana + Color.ANSI_RESET + "\n");
             System.out.print("-----------------------------------------\n");
             System.out.print("1. Spells\n");
             System.out.print("2. Flee\n");

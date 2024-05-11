@@ -1,13 +1,13 @@
+package MainCode;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
+import Dungeons.FirstSpace;
+import Dungeons.beginnersDungeon;
+import PlayerInfo.PlayerStats;
+
 public class MainGame {
-
-    //-------------------------------------------------------------------------------------------------------------------
-
-    // Player attributes
-
 
     //-------------------------------------------------------------------------------------------------------------------
 
@@ -18,10 +18,6 @@ public class MainGame {
     private int Price3 = 0; 
     private int AmountBoughtHp = 0;
     private int AmountBoughtMp = 0;
-    //-------------------------------------------------------------------------------------------------------------------
-
-
-
     //-------------------------------------------------------------------------------------------------------------------
 
     public static final Random random = new Random();
@@ -217,8 +213,8 @@ public class MainGame {
         // Player stats
         Output.slowPrint("Player Stats:\n");
         Output.slowPrint("Name: " + PlayerStats.playerName + "\n");
-        Output.slowPrint("HP: " + PlayerStats.hp + "/" + PlayerStats.maxHp + "\n");
-        Output.slowPrint("Mana: " + PlayerStats.mana + "/" + PlayerStats.maxMana + "\n");
+        Output.slowPrint("HP: "+ Color.ANSI_RED + PlayerStats.hp + Color.ANSI_RESET + "/" + Color.ANSI_RED + PlayerStats.maxHp + Color.ANSI_RESET + "\n");
+        Output.slowPrint("MP: " + Color.ANSI_BLUE + PlayerStats.mana + Color.ANSI_RESET + "/" + Color.ANSI_BLUE + PlayerStats.maxMana + Color.ANSI_RESET + "\n");
         Output.slowPrint("Life Essence: " + PlayerStats.lifeEssence + "\n");
         Output.slowPrint("Spells:\n");
         for (int i = 0; i < Combat.spells.length; i++) {

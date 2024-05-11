@@ -1,3 +1,9 @@
+package Dungeons;
+import DungeonEvents.exampleEvent;
+import MainCode.Event;
+import MainCode.Monster;
+import MainCode.dungeon;
+
 public class beginnersDungeon extends dungeon{
 
     @Override

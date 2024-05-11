@@ -1,3 +1,11 @@
+package Dungeons;
+
+import MainCode.Event;
+import MainCode.MainGame;
+import MainCode.Monster;
+import MainCode.Output;
+import MainCode.dungeon;
+
 public class FirstSpace extends dungeon {
     @Override
     public String getName()

@@ -1,9 +1,13 @@
+package MainCode;
 // Monster class to represent basic monsters in the dungeon
-class Monster extends Event{
+
+public class Monster extends Event{
     private String name;
     private int health;
     private int damage;
     private int lifeEssenceDrop;
+    public int StunnedCounter;
+
 
     // Constructor
     public Monster(String name, int health, int damage, int lifeEssenceDrop) {
@@ -32,5 +36,9 @@ class Monster extends Event{
 
     public int getLifeEssenceDrop() {
         return lifeEssenceDrop;
+    }
+
+    public int Stunned() {
+        return StunnedCounter;
     }
 }

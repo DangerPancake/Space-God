@@ -1,0 +1,5 @@
+Priority (Top to Bottom)
+Max spells Unlockable, Add basic spells function to shop
+Properly set up first dungeon. ( I will do)
+Fix Sanctum to be multiple words ( NEED FIX)
+Clear previous when spells cast( FIXED?)
