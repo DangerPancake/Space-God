@@ -186,7 +186,7 @@ public class MainGame {
             slowPrint("1. Explore\n");
             slowPrint("2. Stats\n");
             if (godOfSpaceUnlocked) {
-                slowPrint("3. SanctumOfReality\n");
+                slowPrint("3. Sanctum Of Reality\n");
             } else {
                 slowPrint("3. Something Is Missing\n");
             }
@@ -246,7 +246,8 @@ public class MainGame {
         slowPrint("Available Dungeons:\n");
         slowPrint("1. Beginner's Dungeon\n");
         slowPrint("2. 1st Trial of the God of Space\n");
-        int choice = getUserChoice(1, 2);
+        slowPrint("3. Dungeontest\n");
+        int choice = getUserChoice(1, 3);
 
         ArrayList<Object> dungeon = parseDungeonInfo(loadDungeonInfo(choice));
         for (int i = 1; i <dungeon.size(); i++) {
@@ -488,7 +489,7 @@ public class MainGame {
                 break;
             case 3:
                 // Exit the shop
-                slowPrint("Exiting the SanctumOfReality...\n");
+                slowPrint("Exiting the Sanctum Of Reality...\n");
                 wait(1000);
                 return;
         }
