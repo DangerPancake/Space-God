@@ -1,5 +1,5 @@
 // Monster class to represent basic monsters in the dungeon
-class Monster {
+class Monster extends Event{
     private String name;
     private int health;
     private int damage;

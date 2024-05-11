@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class MainGame {
     // Initialize scanner for user input
@@ -179,14 +178,13 @@ public class MainGame {
     // Display in-game menu
     public void showInGameMenu() {
         while (true) {
-            System.out.println("ttestin");
             clearScreen();
             // In-game menu
             slowPrint("In-Game Menu:\n");
             slowPrint("1. Explore\n");
             slowPrint("2. Stats\n");
             if (godOfSpaceUnlocked) {
-                slowPrint("3. Sanctum Of Reality\n");
+                slowPrint("3. SanctumOfReality\n");
             } else {
                 slowPrint("3. Something Is Missing\n");
             }
@@ -246,35 +244,158 @@ public class MainGame {
         slowPrint("Available Dungeons:\n");
         slowPrint("1. Beginner's Dungeon\n");
         slowPrint("2. 1st Trial of the God of Space\n");
-        slowPrint("3. Dungeontest\n");
-        int choice = getUserChoice(1, 3);
-
-        ArrayList<Object> dungeon = parseDungeonInfo(loadDungeonInfo(choice));
-        for (int i = 1; i <dungeon.size(); i++) {
-            //monster rooms
-            if (((Room)dungeon.get(i)).getType() == 1) {
-                runCombat(((Room)dungeon.get(i)).getMonster());
-            //text rooms (wip)
-            } else if (((Room)dungeon.get(i)).getType() == 2) {
-                slowPrint(((Room)dungeon.get(i)).getDescription());
-                wait(2000);
-            }
-
-            //extra unlocks and such
-            if (((ArrayList<String>) dungeon.get(0)).get(0).equals("1st Trial of the God of Space") && i == dungeon.size()-1) {
-                godOfSpaceUnlocked = true;
-                slowPrint("You feel a connection with the God of Space...\n");
-                slowPrint("The option to pray to the God of Space is now unlocked!\n");
-                wait(2000);
-            }
+        int choice = getUserChoice(1, 2);
+        switch (choice) {
+            case 1:
+                exploreBeginnersDungeon();
+                break;
+            case 2:
+                exploreGodOfSpaceTrial();
+                break;
         }
-        
     }
 
     //-------------------------------------------------------------------------------------------------------------------
-    
-    // Cast a spell during combat
-    public int castSpell(Monster monster) {
+
+   // Explore Beginner's Dungeon
+    public void exploreBeginnersDungeon() {
+        // Dungeon exploration
+        slowPrint("Exploring the Beginner's Dungeon...\n");
+        wait(1000);
+        // Monster encounters (Manually set monster stats)
+        Event[] events = {
+            new Monster("Wooden Box", 1, 0, 0),
+            new exampleEvent(),
+            new Monster("Ball Of Ants", 1, 0, 1),
+            new Monster("5 Pound Rat", 5, 1, 2)
+        };
+        for (Event event : events) {
+            if (event instanceof Monster){
+            Monster monster = (Monster)event;
+            clearScreen();
+            while (monster.getHealth() > 0 && hp > 0) {
+                System.out.print("You are being attacked by a " + monster.getName() + "!\n");
+                // Player actions
+                System.out.print("-----------------------------------------\n");
+                System.out.print("Your HP: " + hp + "/" + maxHp + "\n");
+                System.out.print("Your Mana: " + mana + "/" + maxMana + "\n");
+                System.out.print("-----------------------------------------\n");
+                System.out.print("1. Spells\n");
+                System.out.print("2. Flee\n");
+                int playerChoice = getUserChoice(1, 2);
+                switch (playerChoice) {
+                    case 1:
+                        castSpell(monster);
+                        break;
+                    case 2:
+                        // Flee with 30% chance of success
+                        if (random.nextInt(100) < 30) {
+                            slowPrint("You successfully fled from " + monster.getName() + "!\n");
+                            return;
+                        } else {
+                            slowPrint("You failed to flee!\n");
+                        }
+                        break;
+                }
+                // Monster actions
+                monsterAttack(monster);
+            }
+            // Monster defeated
+            if (monster.getHealth() <= 0) {
+                slowPrint("You defeated " + monster.getName() + "!\n");
+                int lifeEssenceDrop = monster.getLifeEssenceDrop();
+                lifeEssence += lifeEssenceDrop;
+                slowPrint("You received " + lifeEssenceDrop + " Life Essence!\n");
+                wait(3000);
+                clearScreen();
+            }
+        }
+        else
+        {
+            event.run();
+            wait(1000);
+            clearScreen();
+        }
+    }
+        // After defeating all monsters
+        slowPrint("You cleared the Beginner's Dungeon!\n");
+        slowPrint("Press any key to continue...\n");
+        scanner.nextLine(); // Wait for any key press
+        wait(1000);
+    }
+
+
+
+    //-------------------------------------------------------------------------------------------------------------------
+
+    // Explore 1st Trial of the God of Space
+    public void exploreGodOfSpaceTrial() {
+        // Dungeon exploration
+        slowPrint("Exploring the 1st Trial of the God of Space...\n");
+        wait(1000);
+        // Monster encounters (Manually set monster stats)
+        Monster[] monsters = {
+            new Monster("Placeholder", 0, 3, 1),
+            new Monster("Placeholder", 0, 3, 2),
+            new Monster("Placeholder", 0, 3, 3)
+        };
+        for (Monster monster : monsters) {
+            clearScreen();
+            while (monster.getHealth() > 0 && hp > 0) {
+                System.out.print("You are being attacked by a " + monster.getName() + "!\n");
+                // Player actions
+                System.out.print("-----------------------------------------\n");
+                System.out.print("Your HP: " + hp + "/" + maxHp + "\n");
+                System.out.print("Your Mana: " + mana + "/" + maxMana + "\n");
+                System.out.print("-----------------------------------------\n");
+                System.out.print("1. Spells\n");
+                System.out.print("2. Flee\n");
+                int playerChoice = getUserChoice(1, 2);
+                switch (playerChoice) {
+                    case 1:
+                        castSpell(monster);
+                        break;
+                    case 2:
+                        // Flee with 30% chance of success
+                        if (random.nextInt(100) < 30) {
+                            slowPrint("You successfully fled from " + monster.getName() + "!\n");
+                            return;
+                        } else {
+                            slowPrint("You failed to flee!\n");
+                        }
+                        break;
+                }
+                // Monster actions
+                monsterAttack(monster);
+            }
+             // Monster defeated
+        if (monster.getHealth() <= 0) {
+            slowPrint("You defeated " + monster.getName() + "!\n");
+            int lifeEssenceDrop = monster.getLifeEssenceDrop();
+            lifeEssence += lifeEssenceDrop;
+            slowPrint("You received " + lifeEssenceDrop + " Life Essence!\n");
+            wait(1000);
+            clearScreen();
+        }
+        }
+        // After defeating all monsters
+        slowPrint("You cleared the 1st Trial of the God of Space!\n");
+        slowPrint("Press any key to continue...\n");
+        scanner.nextLine(); // Wait for any key press
+        wait(1000);
+        clearScreen();
+        // Unlock the option to pray to the God of Space
+        slowPrint("You feel a connection with the God of Space...\n");
+        slowPrint("The option to pray to the God of Space is now unlocked!\n");
+        godOfSpaceUnlocked = true;
+
+        wait(2000);
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------
+
+   // Cast a spell during combat
+    public void castSpell(Monster monster) {
     // Print encounter message
     clearScreen();
     System.out.print("You are being attacked by a " + monster.getName() + "!\n");
@@ -306,7 +427,7 @@ public class MainGame {
             slowPrint("You dealt " + damage + " damage to " + monster.getName() + "!\n");
             wait(2000);
             clearScreen();
-            return damage;
+            monster.setHealth(monster.getHealth() - damage);
         } else if (choice == 2 ) { //healing light
            mana -= spellCosts[choice - 1];
            slowPrint("For a moment a warm light covers your skin, you heal 5 hp!\n");
@@ -316,7 +437,6 @@ public class MainGame {
             wait(2000);
             clearScreen();
            } 
-           return 0;
         } else if (choice == 3) { //lesser focus
             mana += maxMana * 0.2; // Restore 20% of max mana with Lesser Focus
             slowPrint("You regained some mana!\n");
@@ -325,75 +445,37 @@ public class MainGame {
                 wait(2000);
                 clearScreen();
             }
-            return 0;
         }
     } else {
         slowPrint("Not enough mana to cast this spell!\n");
     }
     wait(1000);
-    return 0;
 }
+
+
+    //-------------------------------------------------------------------------------------------------------------------
 
    // Monster attacks during combat
     public void monsterAttack(Monster monster) {
-        slowPrint(monster.getName() + " attacked you and dealt " + monster.getDamage() + " damage!");
-        wait(1000);
-        clearScreen();
-        hp -= monster.getDamage();
-        if (hp <= 0) {
-            System.out.println("You were defeated by " + monster.getName() + "!");
-            System.out.println("You Have Died");
-            // Revive the player with life essence
-            if (lifeEssence >= 0) {
-                slowPrint("As you lay dead, all your gathered life essence bursts fourth into the heavens as tribute, an unknown power reaches out, you are revived");
-                hp = maxHp;
-                lifeEssence = 0; // Reviving costs all life essence
-            } 
-        }
-        wait(1000);
+    if (monster.getHealth() <= 0) {
+        return;
     }
-
-    //combat runner
-    public void runCombat(Monster monster) {
-        clearScreen();
-        while (monster.getHealth() > 0 && hp > 0) {
-            System.out.print("You are being attacked by a " + monster.getName() + "!\n");
-            // Player actions
-            System.out.print("-----------------------------------------\n");
-            System.out.print("Your HP: " + hp + "/" + maxHp + "\n");
-            System.out.print("Your Mana: " + mana + "/" + maxMana + "\n");
-            System.out.print("-----------------------------------------\n");
-            System.out.print("1. Spells\n");
-            System.out.print("2. Flee\n");
-            int playerChoice = getUserChoice(1, 2);
-            switch (playerChoice) {
-                case 1:
-                    monster.setHealth(monster.getHealth() - castSpell(monster));
-                    break;
-                case 2:
-                    // Flee with 30% chance of success
-                    if (random.nextInt(100) < 30) {
-                        slowPrint("You successfully fled from " + monster.getName() + "!\n");
-                        return;
-                    } else {
-                        slowPrint("You failed to flee!\n");
-                    }
-                    break;
-            }
-            // Monster actions
-            if (monster.getHealth() > 0)
-                monsterAttack(monster);
-        }
-        // Monster defeated
-        if (monster.getHealth() <= 0) {
-            slowPrint("You defeated " + monster.getName() + "!\n");
-            int lifeEssenceDrop = monster.getLifeEssenceDrop();
-            lifeEssence += lifeEssenceDrop;
-            slowPrint("You received " + lifeEssenceDrop + " Life Essence!\n");
-            wait(3000);
-            clearScreen();
-        }
+    slowPrint(monster.getName() + " attacked you and dealt " + monster.getDamage() + " damage!");
+    wait(1000);
+    clearScreen();
+    hp -= monster.getDamage();
+    if (hp <= 0) {
+        System.out.println("You were defeated by " + monster.getName() + "!");
+        System.out.println("You Have Died");
+        // Revive the player with life essence
+        if (lifeEssence >= 0) {
+            slowPrint("As you lay dead, all your gathered life essence bursts fourth into the heavens as tribute, an unkown power reaches out, you are revived");
+            hp = maxHp;
+            lifeEssence = 0; // Reviving costs all life essence
+        } 
     }
+    wait(1000);
+}
 
     //-------------------------------------------------------------------------------------------------------------------
 
@@ -461,7 +543,6 @@ public class MainGame {
         slowPrint("Character created!\n");
         wait(1000);
     }
-    
     //-------------------------------------------------------------------------------------------------------------------
 
     // God of Space Shop
@@ -489,7 +570,7 @@ public class MainGame {
                 break;
             case 3:
                 // Exit the shop
-                slowPrint("Exiting the Sanctum Of Reality...\n");
+                slowPrint("Exiting the SanctumOfReality...\n");
                 wait(1000);
                 return;
         }
@@ -521,54 +602,6 @@ public class MainGame {
         } else {
             slowPrint("You don't have enough Life Essence!\n");
         }
-    }
-
-    //-------------------------------------------------------------------------------------------------------------------
-    
-    //dungeon api stuff
-    public ArrayList<Object> parseDungeonInfo(ArrayList<String> entry) {
-        ArrayList<Object> info = new ArrayList<>();
-        ArrayList<String> temp = new ArrayList<>();
-        temp.add(entry.get(0));
-        for (int i = 0; i < 3; i++) {
-            if (entry.get(i+1).equals("b")) {
-                temp.add(entry.get(i+1));
-            }
-        }
-        info.add(temp);
-        for (int i = 4; i < entry.size(); i+=3) {
-            if (Integer.parseInt(entry.get(i)) == 1) {
-                info.add(new Room(entry.get(i+1), Integer.parseInt(entry.get(i+2)), Integer.parseInt(entry.get(i+3)), Integer.parseInt(entry.get(i+4))));
-                i+=2;
-            } else if (Integer.parseInt(entry.get(i)) == 2) {
-                info.add(new Room(entry.get(i+1), entry.get(i+2)));
-            }
-        }
-
-        return info;
-    }
-    //loads dungeon info into an arraylist
-    public ArrayList<String> loadDungeonInfo(int dungeon) {
-        ArrayList<String> info = new ArrayList<String>();
-        String fileName = "dungeon" + dungeon + ".txt";
-        File file = new File(fileName);
-        if (file.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String e = "";
-                do {
-                    e = reader.readLine();
-                    System.out.println(e);
-                    if (!e.toString().equals("end")) {
-                        info.add(e);
-                    }
-                } while (!e.toString().equals("end"));
-            } catch (IOException | NumberFormatException e) {
-                System.out.println("error loading dungeon uh oh scoobs.0");
-            }
-        } else {
-            System.out.println("error loading dungeon uh oh scoobs.1");
-        }
-        return info;
     }
 }
 
