@@ -27,8 +27,8 @@ public class dungeon {
         while (monster.getHealth() > 0 && PlayerStats.hp > 0) {
             
             if (monster.Stunned() > 0 ) {
-                System.out.print("The Monster Appears to be stunned\n");
                 Output.wait(500);
+                System.out.print("The Monster Appears to be stunned\n");
             } else {
                 System.out.print("You are being attacked by a " + monster.getName() + "!\n");
             }

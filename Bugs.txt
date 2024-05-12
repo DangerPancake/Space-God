@@ -1,11 +1,11 @@
 Priority (Top to Bottom)-
 
-shock bolt broken (stunned turned skipped no purpose.)
-make sure when healed cd is also removed 
-Make life essence green, god text purple. 
-Properly set up first dungeon. ( I will do)
-Properlys etup wellspring (Add lore alt page)
-Max spells Unlockable, Add basic spells function to shop ( I do) And better lore
+shock bolt broken slightly seemingly lasted one turn longer then should with no text will investiagte
+make sure when healed cd is also removed in wellspring of soulds 
+Make life essence green, god text purple. (ME WILL FIX) 
+Properly set up first dungeon. ( I will do) (ME WILL FIX)
+Properlys setup wellspring (Add lore alt page) (ME WILL FIX)
+Max spells Unlockable, Add basic spells function to shop ( I do) And better lore (ME WILL FIX)
 
 
 -----------------------------------------------------------------------------------------------------------------------------
