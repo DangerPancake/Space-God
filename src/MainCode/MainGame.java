@@ -280,12 +280,12 @@ public class MainGame {
         Price2 = AmountBoughtMp + 5;
 
         Output.clearScreen();
-        Output.slowPrint("Hello Miniscule Creature!\n");
-        Output.slowPrint("Do you wish to sacrifice the energy of any souls?\n");
+        Output.slowPrint(Color.ANSI_PURPLE + "Hello Miniscule Creature!\n" + Color.ANSI_RESET);
+        Output.slowPrint(Color.ANSI_PURPLE + "Do you wish to sacrifice the energy of any souls?\n" + Color.ANSI_RESET);
         Output.slowPrint("Current LifeEssence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         Output.slowPrint("\n");
-        Output.slowPrint("1. Life Essence Absorbtion " + Price1 + " LE\n");
-        Output.slowPrint("2. Life Essence Conversion " + Price2 + " LE\n");
+        Output.slowPrint("1. Life Essence Absorbtion " + Color.ANSI_GREEN + Price1 + Color.ANSI_RESET + " LE\n");
+        Output.slowPrint("2. Life Essence Conversion " + Color.ANSI_GREEN + Price2 + Color.ANSI_RESET + " LE\n");
         Output.slowPrint("3. Exit The Sactum\n");
 
         int choice = Output.getUserChoice(1, 3);

@@ -16,7 +16,6 @@ public class beginnersDungeon extends dungeon{
     public Event[] getEvents() {
         Event[] events = {
         new Monster("Wooden Box", 1, 0, 0),
-        new exampleEvent(),
         new Monster("Ball Of Ants", 1, 0, 1),
         new Monster("5 Pound Rat", 5, 1, 2)
     };

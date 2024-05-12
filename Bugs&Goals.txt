@@ -1,22 +1,27 @@
 Bugs Priority (Top to Bottom)-
-make sure when healed cd is also removed in wellspring of soulds 
+-make sure when healed cd is also removed in wellspring of soulds
 
+--------------------------------------------------------------------------------------------------------
+
+Quality of Life
+
+-Make stunned monster says it's stunned, rather then still say its attacking without dealing dmg.
 
 -----------------------------------------------------------------------------------------------------------------------------
 
 Goals 
 
-Make life essence green, god text purple. (ME WILL FIX) 
-Properly set up first dungeon. ( I will do) (ME WILL FIX)
-Properlys setup wellspring (Add lore alt page) (ME WILL FIX)
-Make spells Unlockable, Add basic spells function to shop ( I do) And better lore (ME WILL FIX)
+-god text purple. (ME WILL FIX) 
+-Properly set up first dungeon. ( I will do) (ME WILL FIX)
+-Properlys setup wellspring (Add lore alt page) (ME WILL FIX)
+-Make spells Unlockable, Add basic spells function to shop ( I do) And better lore (ME WILL FIX)
 
 
 -----------------------------------------------------------------------------------------------------------------------------
 
 Think is fixed but keep eye out for-
 
-Clear previous when spells cast
-Shock bolt does not save when saving game (FIXED-Keep in mind same bug will occur when adding spells)
+-Clear previous when spells cast
+-Shock bolt does not save when saving game (FIXED-Keep in mind same bug will occur when adding spells)
 
 
