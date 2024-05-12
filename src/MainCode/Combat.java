@@ -33,6 +33,7 @@ public class Combat {
                     Output.slowPrint("As you lay dead, all your gathered life essence bursts fourth into the heavens as tribute, an unkown power reaches out, you are revived");
                     PlayerStats.hp = PlayerStats.maxHp;
                     PlayerStats.lifeEssence = 0; // Reviving costs all life essence
+                    return;
                 }
             } 
         }

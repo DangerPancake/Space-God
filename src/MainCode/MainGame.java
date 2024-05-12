@@ -181,12 +181,12 @@ public class MainGame {
             if (godOfSpaceUnlocked) {
                 Output.slowPrint("3. Sanctum Of Reality\n");
             } else {
-                Output.slowPrint("3. Something Is Missing\n");
+                Output.slowPrint("3. Locked\n");
             }
             if (WellspringUnlocked) {
                 Output.slowPrint("4. Wellspring Of Souls\n");
             } else {
-                Output.slowPrint("4. Something is Missing\n");
+                Output.slowPrint("4. Locked\n");
             }
             Output.slowPrint("5. Exit to Main Menu\n");
             int choice = Output.getUserChoice(1, 5);
@@ -207,9 +207,7 @@ public class MainGame {
                     break;
                 case 4:
                 if (WellspringUnlocked) {
-                    Output.slowPrint("LORE LORE LORE LORE \n");
-                    PlayerStats.hp = PlayerStats.maxHp;
-                    PlayerStats.mana = PlayerStats.maxMana;
+                    Wellspring();
                 } else {
                     Output.slowPrint("You haven't unlocked this option yet.\n");
                 }
@@ -258,6 +256,8 @@ public class MainGame {
         }
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
     // End the game
     public void endGame() {
         Output.slowPrint("\033[H\033[2J"); // Clear the screen
@@ -273,6 +273,21 @@ public class MainGame {
         Output.wait(1000);
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+    public void Wellspring() {
+        Output.slowPrint(Color.ANSI_BLUE + "You bathe in the blood of gods !\n" + Color.ANSI_RESET);
+        PlayerStats.hp = PlayerStats.maxHp;
+        PlayerStats.mana = PlayerStats.maxMana;
+        for (int cool = 0; cool < Combat.spells.length; cool++ ) {
+            Combat.coolDown[cool] = 0;
+        }
+        
+
+        Output.wait(1000);
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------
+
     // God of Space Shop
     public void SanctumOfReality() {
 
@@ -284,8 +299,8 @@ public class MainGame {
         Output.slowPrint(Color.ANSI_PURPLE + "Do you wish to sacrifice the energy of any souls?\n" + Color.ANSI_RESET);
         Output.slowPrint("Current LifeEssence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         Output.slowPrint("\n");
-        Output.slowPrint("1. Life Essence Absorbtion " + Color.ANSI_GREEN + Price1 + Color.ANSI_RESET + " LE\n");
-        Output.slowPrint("2. Life Essence Conversion " + Color.ANSI_GREEN + Price2 + Color.ANSI_RESET + " LE\n");
+        Output.slowPrint("1. Life Essence Absorbtion " + Color.ANSI_GREEN + Price1 + Color.ANSI_RESET + "\n");
+        Output.slowPrint("2. Life Essence Conversion " + Color.ANSI_GREEN + Price2 + Color.ANSI_RESET + "\n");
         Output.slowPrint("3. Exit The Sactum\n");
 
         int choice = Output.getUserChoice(1, 3);
@@ -331,6 +346,8 @@ public class MainGame {
             Output.slowPrint("You don't have enough Life Essence!\n");
         }
     }
+    //-------------------------------------------------------------------------------------------------------------------
+
 }
 
 //Uroxx, Ruler Of the Void
