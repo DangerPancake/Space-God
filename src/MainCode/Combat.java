@@ -1,17 +1,15 @@
 package MainCode;
 import java.io.*;
-
 import PlayerInfo.PlayerStats;
 
 public class Combat {
-
     // Spells
     public static String[] spells = {"Firebolt", "Healing Light", "Lesser Focus", "Shock Bolt"};
     public static int[] spellCosts = {3, 5, 0, 5};
     public static int[] coolDown ={0, 0, 0, 0}; 
 
-       // Monster attacks during combat
-       public static void monsterAttack(Monster monster) {
+    // Monster attacks during combat
+    public static void monsterAttack(Monster monster) {
         if (monster.getHealth() <= 0) {
             return;
         }
@@ -21,34 +19,34 @@ public class Combat {
             Output.slowPrint(monster.getName() + " is stunned!");
             Output.wait(1000);
             Output.clearScreen();
-        }  else {
+        } else {
 
-        Output.slowPrint(monster.getName() + " attacked you and dealt " + monster.getDamage() + " damage!");
-        Output.wait(1000);
-        Output.clearScreen();
-        PlayerStats.hp -= monster.getDamage();
-        if (PlayerStats.hp <= 0) {
-            System.out.println("You were defeated by " + monster.getName() + "!");
-            System.out.println("You Have Died");
-            // Revive the player with life essence
-            if (PlayerStats.lifeEssence >= 0) {
-                Output.slowPrint("As you lay dead, all your gathered life essence bursts fourth into the heavens as tribute, an unkown power reaches out, you are revived");
-                PlayerStats.hp = PlayerStats.maxHp;
-                PlayerStats.lifeEssence = 0; // Reviving costs all life essence
-            }
+            Output.slowPrint(monster.getName() + " attacked you and dealt " + monster.getDamage() + " damage!");
+            Output.wait(1000);
+            Output.clearScreen();
+            PlayerStats.hp -= monster.getDamage();
+            if (PlayerStats.hp <= 0) {
+                System.out.println("You were defeated by " + monster.getName() + "!");
+                System.out.println("You Have Died");
+                // Revive the player with life essence
+                if (PlayerStats.lifeEssence >= 0) {
+                    Output.slowPrint("As you lay dead, all your gathered life essence bursts fourth into the heavens as tribute, an unkown power reaches out, you are revived");
+                    PlayerStats.hp = PlayerStats.maxHp;
+                    PlayerStats.lifeEssence = 0; // Reviving costs all life essence
+                }
             } 
         }
     }
 
      // Cast a spell during combat
-     public static void castSpell(Monster monster) {
+    public static void castSpell(Monster monster) {
         // Print encounter message
         Output.clearScreen();
         if (monster.Stunned() > 0 ) {
             Output.clearScreen();
             System.out.print("The Monster Appears to be stunned\n"); 
-        }  else {
-        System.out.print("You are being attacked by a " + monster.getName() + "!\n");
+        } else {
+            System.out.print("You are being attacked by a " + monster.getName() + "!\n");
         }
     
         // Print player stats
@@ -109,19 +107,18 @@ public class Combat {
                     Output.clearScreen();
                 }
             } else if (choice == 4) { //ShockBolt 
-            coolDown[3] += 1;
-            PlayerStats.mana -= spellCosts[choice - 1];
-            int damage = MainGame.random.nextInt(2) + 1; // 2 DMG
-            monster.StunnedCounter += 1;
-            Output.slowPrint("You dealt " + damage + " damage to " + monster.getName() + "!\n");
-            Output.slowPrint("You stunned your target!");
-            Output.wait(2000);
-            Output.clearScreen();
-            monster.setHealth(monster.getHealth() - damage);
-        } else {
-            Output.slowPrint("Not enough mana to cast this spell!\n");
+                coolDown[3] += 1;
+                PlayerStats.mana -= spellCosts[choice - 1];
+                int damage = MainGame.random.nextInt(2) + 1; // 2 DMG
+                monster.StunnedCounter += 1;
+                Output.slowPrint("You dealt " + damage + " damage to " + monster.getName() + "!\n");
+                Output.slowPrint("You stunned your target!");
+                Output.wait(2000);
+                Output.clearScreen();
+                monster.setHealth(monster.getHealth() - damage);
+            } else {
+                Output.slowPrint("Not enough mana to cast this spell!\n");
+            }
         }
-        //Output.wait(1000);
     }
-}
 }

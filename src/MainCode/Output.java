@@ -5,7 +5,6 @@ public class Output {
     private static boolean goFast = false;
     // Initialize scanner for user input
     public static final Scanner scanner = new Scanner(System.in);
-
         // Print text with delay for dramatic effect
         public static void slowPrint(String input) {
             for (int i = 0; i < input.length(); i++) {
@@ -21,11 +20,12 @@ public class Output {
             }
         }
 
-            // Clear the screen for better readability
+    // Clear the screen for better readability
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+    //sets going fast
     public static void setFast() {
         goFast = true;
     }
@@ -43,19 +43,18 @@ public class Output {
         }
     }
 
-        // Get user choice from the given range
-        public static int getUserChoice(int min, int max) {
-            int choice;
-            do {
-                Output.slowPrint("Enter your choice: ");
-                while (!scanner.hasNextInt()) {
-                    Output.slowPrint("Invalid input. Please enter a number between " + min + " and " + max + ": ");
-                    scanner.next();
-                }
-                choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
-            } while (choice < min || choice > max);
+    // Get user choice from the given range
+    public static int getUserChoice(int min, int max) {
+        int choice;
+        do {
+            Output.slowPrint("Enter your choice: ");
+            while (!scanner.hasNextInt()) {
+                Output.slowPrint("Invalid input. Please enter a number between " + min + " and " + max + ": ");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+        } while (choice < min || choice > max);
             return choice;
-        }
-
+    }
 }

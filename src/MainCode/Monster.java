@@ -8,7 +8,6 @@ public class Monster extends Event{
     private int lifeEssenceDrop;
     public int StunnedCounter;
 
-
     // Constructor
     public Monster(String name, int health, int damage, int lifeEssenceDrop) {
         this.name = name;

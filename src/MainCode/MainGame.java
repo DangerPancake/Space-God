@@ -1,7 +1,6 @@
 package MainCode;
 import java.io.*;
 import java.util.Random;
-import java.util.Scanner;
 
 import Dungeons.FirstSpace;
 import Dungeons.beginnersDungeon;
@@ -10,7 +9,6 @@ import PlayerInfo.PlayerStats;
 public class MainGame {
 
     //-------------------------------------------------------------------------------------------------------------------
-
     //Unlocks
     public static boolean godOfSpaceUnlocked = false;
     public static boolean WellspringUnlocked = false;
@@ -22,7 +20,6 @@ public class MainGame {
     //-------------------------------------------------------------------------------------------------------------------
 
     public static final Random random = new Random();
-    private boolean goFast = false;
 
     // Main method
     public static void main(String[] args) {
@@ -233,7 +230,7 @@ public class MainGame {
         Output.slowPrint("Name: " + PlayerStats.playerName + "\n");
         Output.slowPrint("HP: "+ Color.ANSI_RED + PlayerStats.hp + Color.ANSI_RESET + "/" + Color.ANSI_RED + PlayerStats.maxHp + Color.ANSI_RESET + "\n");
         Output.slowPrint("MP: " + Color.ANSI_BLUE + PlayerStats.mana + Color.ANSI_RESET + "/" + Color.ANSI_BLUE + PlayerStats.maxMana + Color.ANSI_RESET + "\n");
-        Output.slowPrint("Life Essence: " + PlayerStats.lifeEssence + "\n");
+        Output.slowPrint("Life Essence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         Output.slowPrint("Spells:\n");
         for (int i = 0; i < Combat.spells.length; i++) {
             Output.slowPrint(Combat.spells[i] + " (Mana Cost: " + Combat.spellCosts[i] + ")\n");
@@ -261,7 +258,6 @@ public class MainGame {
         }
     }
 
-
     // End the game
     public void endGame() {
         Output.slowPrint("\033[H\033[2J"); // Clear the screen
@@ -276,7 +272,6 @@ public class MainGame {
         Output.slowPrint("Character created!\n");
         Output.wait(1000);
     }
-    //-------------------------------------------------------------------------------------------------------------------
 
     // God of Space Shop
     public void SanctumOfReality() {
@@ -287,7 +282,7 @@ public class MainGame {
         Output.clearScreen();
         Output.slowPrint("Hello Miniscule Creature!\n");
         Output.slowPrint("Do you wish to sacrifice the energy of any souls?\n");
-        Output.slowPrint("Current LifeEssence: " + PlayerStats.lifeEssence + "\n");
+        Output.slowPrint("Current LifeEssence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         Output.slowPrint("\n");
         Output.slowPrint("1. Life Essence Absorbtion " + Price1 + " LE\n");
         Output.slowPrint("2. Life Essence Conversion " + Price2 + " LE\n");
@@ -331,7 +326,7 @@ public class MainGame {
                     break;
             }
              // Reduce life essence (cost of purchasing)
-            Output.slowPrint("Remaining Life Essence: " + PlayerStats.lifeEssence + "\n");
+            Output.slowPrint("Remaining Life Essence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         } else {
             Output.slowPrint("You don't have enough Life Essence!\n");
         }
