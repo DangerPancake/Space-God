@@ -1,11 +1,15 @@
-Priority (Top to Bottom)-
-
-shock bolt broken slightly seemingly lasted one turn longer then should with no text will investiagte
+Bugs Priority (Top to Bottom)-
 make sure when healed cd is also removed in wellspring of soulds 
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Goals 
+
 Make life essence green, god text purple. (ME WILL FIX) 
 Properly set up first dungeon. ( I will do) (ME WILL FIX)
 Properlys setup wellspring (Add lore alt page) (ME WILL FIX)
-Max spells Unlockable, Add basic spells function to shop ( I do) And better lore (ME WILL FIX)
+Make spells Unlockable, Add basic spells function to shop ( I do) And better lore (ME WILL FIX)
 
 
 -----------------------------------------------------------------------------------------------------------------------------
