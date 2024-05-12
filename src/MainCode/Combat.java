@@ -17,11 +17,10 @@ public class Combat {
         }
         if (monster.Stunned() > 0 ) {
             Output.clearScreen();
-            Output.slowPrint("The Monster Appears to be stunned");
             monster.StunnedCounter -= 1; 
-            return;
-        }
-        Output.clearScreen();
+            Output.clearScreen();
+        }  else {
+
         Output.slowPrint(monster.getName() + " attacked you and dealt " + monster.getDamage() + " damage!");
         Output.wait(1000);
         Output.clearScreen();
@@ -34,6 +33,7 @@ public class Combat {
                 Output.slowPrint("As you lay dead, all your gathered life essence bursts fourth into the heavens as tribute, an unkown power reaches out, you are revived");
                 PlayerStats.hp = PlayerStats.maxHp;
                 PlayerStats.lifeEssence = 0; // Reviving costs all life essence
+            }
             } 
         }
         Output.wait(1000);
@@ -43,10 +43,15 @@ public class Combat {
      public static void castSpell(Monster monster) {
         // Print encounter message
         Output.clearScreen();
+        if (monster.Stunned() > 0 ) {
+            Output.clearScreen();
+            System.out.print("The Monster Appears to be stunned\n"); 
+        }  else {
         System.out.print("You are being attacked by a " + monster.getName() + "!\n");
-        System.out.print("-----------------------------------------\n");
+        }
     
         // Print player stats
+        System.out.print("-----------------------------------------\n");
         System.out.print("HP: "+ Color.ANSI_RED + PlayerStats.hp + Color.ANSI_RESET + "/" + Color.ANSI_RED + PlayerStats.maxHp + Color.ANSI_RESET + "\n");
         System.out.print("MP: " + Color.ANSI_BLUE + PlayerStats.mana + Color.ANSI_RESET + "/" + Color.ANSI_BLUE + PlayerStats.maxMana + Color.ANSI_RESET + "\n");
         System.out.print("-----------------------------------------\n");
@@ -67,7 +72,6 @@ public class Combat {
         {
           coolDown[i] = Math.max(0,coolDown[i]-1);
         }
-        Output.slowPrint("Select a spell to cast (1-" + spells.length + "): ");
         int choice = Output.getUserChoice(1, spells.length);
     
         Output.clearScreen(); // Clear the screen after selecting spells
@@ -104,7 +108,7 @@ public class Combat {
                     Output.clearScreen();
                 }
             } else if (choice == 4) { //ShockBolt 
-            coolDown[3] += 2;
+            coolDown[3] += 1;
             PlayerStats.mana -= spellCosts[choice - 1];
             int damage = MainGame.random.nextInt(2) + 1; // 2 DMG
             monster.StunnedCounter += 2;

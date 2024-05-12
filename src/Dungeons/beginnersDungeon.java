@@ -1,7 +1,9 @@
 package Dungeons;
 import DungeonEvents.exampleEvent;
 import MainCode.Event;
+import MainCode.MainGame;
 import MainCode.Monster;
+import MainCode.Output;
 import MainCode.dungeon;
 
 public class beginnersDungeon extends dungeon{
@@ -20,4 +22,13 @@ public class beginnersDungeon extends dungeon{
     };
     return events;
 }
+@Override
+    public void onComplete() {
+        // Unlock the option to pray to the God of Space
+        Output.slowPrint("LORE WOW\n");
+        Output.slowPrint("LORE UNLOCKED WOW!\n");
+        MainGame.WellspringUnlocked = true;
+
+        Output.wait(2000);
+    }
 }

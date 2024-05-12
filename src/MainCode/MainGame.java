@@ -13,6 +13,7 @@ public class MainGame {
 
     //Unlocks
     public static boolean godOfSpaceUnlocked = false;
+    public static boolean WellspringUnlocked = false;
     private int Price1 = 0; 
     private int Price2 = 0; 
     private int Price3 = 0; 
@@ -99,6 +100,10 @@ public class MainGame {
                 writer.println(1);
             else
                 writer.println(0);
+            if (WellspringUnlocked)
+                writer.println(2);
+            else
+                writer.println(0);
             for (String spell : Combat.spells) {
                 writer.println(spell);
             }
@@ -141,12 +146,17 @@ public class MainGame {
                 PlayerStats.lifeEssence = Integer.parseInt(reader.readLine());
                 AmountBoughtHp = Integer.parseInt(reader.readLine());
                 AmountBoughtMp = Integer.parseInt(reader.readLine());
-                int temp = Integer.parseInt(reader.readLine());
+                int temp = Integer.parseInt(reader.readLine());// God Unlock
                 if (temp == 1) 
                     godOfSpaceUnlocked = true;
                 else
                     godOfSpaceUnlocked = false;
-                Combat.spells = new String[3];
+                int temp2 = Integer.parseInt(reader.readLine());//wellspring unlock
+                if (temp2 == 2) 
+                    WellspringUnlocked = true;
+                else
+                    WellspringUnlocked = false;
+                Combat.spells = new String[4];
                 for (int j = 0; j < Combat.spells.length; j++) {
                     Combat.spells[j] = reader.readLine();
                 }
@@ -172,11 +182,15 @@ public class MainGame {
             Output.slowPrint("1. Explore\n");
             Output.slowPrint("2. Stats\n");
             if (godOfSpaceUnlocked) {
-                Output.slowPrint("3. SanctumOfReality\n");
+                Output.slowPrint("3. Sanctum Of Reality\n");
             } else {
                 Output.slowPrint("3. Something Is Missing\n");
             }
-            Output.slowPrint("4. Tavern\n");
+            if (WellspringUnlocked) {
+                Output.slowPrint("4. Wellspring Of Souls\n");
+            } else {
+                Output.slowPrint("4. Something is Missing\n");
+            }
             Output.slowPrint("5. Exit to Main Menu\n");
             int choice = Output.getUserChoice(1, 5);
             switch (choice) {
@@ -190,14 +204,18 @@ public class MainGame {
                     if (godOfSpaceUnlocked) {
                         SanctumOfReality();
                     } else {
-                        Output.slowPrint("You haven't unlocked this option yet.\n");
+                        Output.slowPrint("You haven't unlocked this option yet.\n"); 
                     }
                     Output.wait(1000);
                     break;
                 case 4:
-                    Output.slowPrint("You visit the tavern and are feeling much better! \n");
+                if (WellspringUnlocked) {
+                    Output.slowPrint("LORE LORE LORE LORE \n");
                     PlayerStats.hp = PlayerStats.maxHp;
                     PlayerStats.mana = PlayerStats.maxMana;
+                } else {
+                    Output.slowPrint("You haven't unlocked this option yet.\n");
+                }
                     Output.wait(1000);
                     break;
                 case 5:
@@ -285,7 +303,7 @@ public class MainGame {
                 break;
             case 3:
                 // Exit the shop
-                Output.slowPrint("Exiting the SanctumOfReality...\n");
+                Output.slowPrint("Exiting the Sanctum Of Reality...\n");
                 Output.wait(1000);
                 return;
         }

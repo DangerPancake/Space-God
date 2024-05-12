@@ -25,7 +25,14 @@ public class dungeon {
         Monster monster = (Monster)event;
         Output.clearScreen();
         while (monster.getHealth() > 0 && PlayerStats.hp > 0) {
-            System.out.print("You are being attacked by a " + monster.getName() + "!\n");
+            
+            if (monster.Stunned() > 0 ) {
+                System.out.print("The Monster Appears to be stunned\n");
+                Output.wait(500);
+            } else {
+                System.out.print("You are being attacked by a " + monster.getName() + "!\n");
+            }
+
             // Player actions
             System.out.print("-----------------------------------------\n");
             System.out.print("HP: "+ Color.ANSI_RED + PlayerStats.hp + Color.ANSI_RESET + "/" + Color.ANSI_RED + PlayerStats.maxHp + Color.ANSI_RESET + "\n");
@@ -47,7 +54,8 @@ public class dungeon {
                         Output.slowPrint("You failed to flee!\n");
                     }
                     break;
-            }
+                }
+            
             // Monster actions
             Combat.monsterAttack(monster);
         }

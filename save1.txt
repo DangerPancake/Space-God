@@ -1,12 +1,14 @@
-Test
-15
-15
-10
-10
-1
-5
+BEans
+10000
+10000
+10000
+10000
 0
-1
+0
+0
+0
+0
 Firebolt
 Healing Light
 Lesser Focus
+Shock Bolt

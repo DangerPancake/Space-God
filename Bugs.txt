@@ -1,0 +1,18 @@
+Priority (Top to Bottom)-
+
+shock bolt broken (stunned turned skipped no purpose.)
+make sure when healed cd is also removed 
+Make life essence green, god text purple. 
+Properly set up first dungeon. ( I will do)
+Properlys etup wellspring (Add lore alt page)
+Max spells Unlockable, Add basic spells function to shop ( I do) And better lore
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Think is fixed but keep eye out for-
+
+Clear previous when spells cast
+Shock bolt does not save when saving game (FIXED-Keep in mind same bug will occur when adding spells)
+
+
