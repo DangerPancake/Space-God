@@ -55,7 +55,7 @@ public class MainGame {
                     endGame();
                     break;
                 case 5:
-                    goFast = true;
+                    Output.setFast();
             }
         }
     }

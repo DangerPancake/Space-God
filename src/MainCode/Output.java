@@ -2,7 +2,7 @@ package MainCode;
 import java.util.Scanner;
 
 public class Output {
-
+    private static boolean goFast = false;
     // Initialize scanner for user input
     public static final Scanner scanner = new Scanner(System.in);
 
@@ -11,7 +11,10 @@ public class Output {
             for (int i = 0; i < input.length(); i++) {
                 System.out.print(input.charAt(i));
                 try {
-                        Thread.sleep(30); // Faster printing in dungeons
+                        if (goFast) 
+                            Thread.sleep(2);
+                        else
+                            Thread.sleep(30); // Faster printing in dungeons
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -23,11 +26,16 @@ public class Output {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-
+    public static void setFast() {
+        goFast = true;
+    }
 
     // Wait for a specified amount of time
     public static void wait(int time) {
         try {
+            if (goFast) {
+                Thread.sleep(100);
+            } else 
                 Thread.sleep(time);
 
         } catch (InterruptedException e) {

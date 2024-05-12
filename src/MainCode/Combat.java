@@ -18,6 +18,8 @@ public class Combat {
         if (monster.Stunned() > 0 ) {
             Output.clearScreen();
             monster.StunnedCounter -= 1; 
+            Output.slowPrint(monster.getName() + " is stunned!");
+            Output.wait(1000);
             Output.clearScreen();
         }  else {
 
@@ -36,7 +38,6 @@ public class Combat {
             }
             } 
         }
-        Output.wait(1000);
     }
 
      // Cast a spell during combat
@@ -111,7 +112,7 @@ public class Combat {
             coolDown[3] += 1;
             PlayerStats.mana -= spellCosts[choice - 1];
             int damage = MainGame.random.nextInt(2) + 1; // 2 DMG
-            monster.StunnedCounter += 2;
+            monster.StunnedCounter += 1;
             Output.slowPrint("You dealt " + damage + " damage to " + monster.getName() + "!\n");
             Output.slowPrint("You stunned your target!");
             Output.wait(2000);
@@ -120,7 +121,7 @@ public class Combat {
         } else {
             Output.slowPrint("Not enough mana to cast this spell!\n");
         }
-        Output.wait(1000);
+        //Output.wait(1000);
     }
 }
 }
