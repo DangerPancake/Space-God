@@ -9,7 +9,7 @@ import MainCode.dungeon;
 public class FirstSpace extends dungeon {
     @Override
     public String getName()
-    {return "the 1st Trial of the God of Space";}
+    {return "The First Trial";} //change 
 
     @Override
     public Event[] getEvents() {
@@ -24,8 +24,8 @@ public class FirstSpace extends dungeon {
     @Override
     public void onComplete() {
         // Unlock the option to pray to the God of Space
-        Output.slowPrint("You feel a connection with the God of Space...\n");
-        Output.slowPrint("The option to pray to the God of Space is now unlocked!\n");
+        Output.slowPrint("You feel a connection with the God of Space...\n"); //improve and redo lore
+        Output.slowPrint("The option to pray to the God of Space is now unlocked!\n"); //improve and redo 
         MainGame.godOfSpaceUnlocked = true;
 
         Output.wait(2000);

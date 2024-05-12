@@ -10,7 +10,7 @@ public class beginnersDungeon extends dungeon{
 
     @Override
     public String getName()
-    {return "the Beginner's Dungeon";}
+    {return "Mountain Cave";}
 
     @Override
     public Event[] getEvents() {

@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.Random;
 
 import Dungeons.FirstSpace;
+import Dungeons.TestDungeon;
 import Dungeons.beginnersDungeon;
 import PlayerInfo.PlayerStats;
 
@@ -10,8 +11,8 @@ public class MainGame {
 
     //-------------------------------------------------------------------------------------------------------------------
     //Unlocks
-    public static boolean godOfSpaceUnlocked = false;
-    public static boolean WellspringUnlocked = false;
+    public static boolean godOfSpaceUnlocked = false; //Unlock Shop
+    public static boolean WellspringUnlocked = false; //Unlock Heal
     private int Price1 = 0; 
     private int Price2 = 0; 
     private int Price3 = 0; 
@@ -243,15 +244,20 @@ public class MainGame {
         Output.clearScreen();
         // Available dungeons sorted by difficulty
         Output.slowPrint("Available Dungeons:\n");
-        Output.slowPrint("1. Beginner's Dungeon\n");
-        Output.slowPrint("2. 1st Trial of the God of Space\n");
-        int choice = Output.getUserChoice(1, 2);
+        Output.slowPrint("1. Mountain Cave\n"); // maybe improve lore/name
+        Output.slowPrint("2. The First Trial\n"); 
+        Output.slowPrint("3. TestDungeon\n");
+
+        int choice = Output.getUserChoice(1, 3);
         switch (choice) {
             case 1:
                 new beginnersDungeon().explore();
                 break;
             case 2:
-                new FirstSpace().explore();;
+                new FirstSpace().explore(); // was extra ; if that somehow changes anything
+                break;
+            case 3:
+                new TestDungeon().explore(); 
                 break;
         }
     }
@@ -288,7 +294,7 @@ public class MainGame {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-    // God of Space Shop
+    // God Shop
     public void SanctumOfReality() {
 
         Price1 = AmountBoughtHp + 5;
@@ -319,7 +325,7 @@ public class MainGame {
         }
     }
 
-    // Buy items from the God of Space Shop
+    // Buy items from the God Shop
     public void buyItem(String item) {
         if (PlayerStats.lifeEssence >= 0) {
             switch (item) {

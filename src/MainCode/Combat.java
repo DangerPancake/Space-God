@@ -108,7 +108,7 @@ public class Combat {
                     Output.clearScreen();
                 }
             } else if (choice == 4) { //ShockBolt 
-                coolDown[3] += 1;
+                coolDown[3] += 2; 
                 PlayerStats.mana -= spellCosts[choice - 1];
                 int damage = MainGame.random.nextInt(2) + 1; // 2 DMG
                 monster.StunnedCounter += 1;
