@@ -5,6 +5,7 @@ Bugs Priority (Top to Bottom)-
 -----------------------------------------------------------------------------------------------------------------------------
 Goals 
 
+- Not unlock shock Bolt from start
 -Properly set up first dungeon. ( I will do) (ME WILL FIX)
 -wellspring (Add unlock lore) (ME WILL FIX)
 -Make spells Unlockable, Add basic spells function to shop ( I do) And better lore (ME WILL FIX)
@@ -33,5 +34,9 @@ Think is fixed, but keep eye out for-
 
 
 -----------------------------------------------------------------------------------------------------------------------------
+
+Dumb ideas
+
+-Make god text rainbow
 
 

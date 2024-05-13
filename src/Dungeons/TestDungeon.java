@@ -5,7 +5,7 @@ import MainCode.Monster;
 import MainCode.Output;
 import MainCode.dungeon;
 
-public class TestDungeon extends dungeon {
+public class TestDungeon extends dungeon { // for testing spells&combat&events
     @Override
     public String getName()
     {return "TestDungeon";}
