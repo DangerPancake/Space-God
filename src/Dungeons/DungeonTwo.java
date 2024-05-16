@@ -5,7 +5,7 @@ import MainCode.Monster;
 import MainCode.Output;
 import MainCode.dungeon;
 
-public class TestDungeon extends dungeon { // for testing spells&combat&events
+public class DungeonTwo extends dungeon { // for testing spells&combat&events
     @Override
     public String getName()
     {return "TestDungeon";}
@@ -22,6 +22,7 @@ public class TestDungeon extends dungeon { // for testing spells&combat&events
 
     @Override
     public void onComplete() {
+        //find another scrap of power get better firebolt spell meet god first time, invites you try his tower
        
     }
 }

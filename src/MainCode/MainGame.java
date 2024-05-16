@@ -1,10 +1,12 @@
 package MainCode;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.jar.Attributes.Name;
 
 import Dungeons.FirstSpace;
-import Dungeons.TestDungeon;
-import Dungeons.beginnersDungeon;
+import Dungeons.DungeonTwo;
+import Dungeons.DungeonOne;
 import PlayerInfo.PlayerStats;
 
 public class MainGame {
@@ -14,10 +16,15 @@ public class MainGame {
     public static boolean godOfSpaceUnlocked = false; //Unlock Shop
     public static boolean WellspringUnlocked = false; //Unlock Heal
     private int Price1 = 0; 
-    private int Price2 = 0; 
-    private int Price3 = 0; 
+    private int Price2 = 0;  
     private int AmountBoughtHp = 0;
     private int AmountBoughtMp = 0;
+
+    //Spell Unlocks 
+    private int LesserSpellsUnlocked = 0; //make this max 3 so you can only get three, maybe have second set for lesser offensive lesser buff idk
+    public static boolean StunboltUnlock = false; 
+
+
     //-------------------------------------------------------------------------------------------------------------------
 
     public static final Random random = new Random();
@@ -30,6 +37,15 @@ public class MainGame {
 
     // Start the game
     public void startGame() {
+        Combat.coolDown.add(0);
+        Combat.coolDown.add(0);
+        Combat.coolDown.add(0);
+        Combat.Spells.add("Firebolt");
+        Combat.Spells.add("we");
+        Combat.Spells.add("pe");
+        Combat.spellCosts.add(3);
+        Combat.spellCosts.add(5);
+        Combat.spellCosts.add(0);
         while (true) {
             Output.clearScreen();
             // Main menu
@@ -102,7 +118,7 @@ public class MainGame {
                 writer.println(2);
             else
                 writer.println(0);
-            for (String spell : Combat.spells) {
+            for (String spell : Combat.Spells) {
                 writer.println(spell);
             }
             Output.slowPrint("Game saved to slot " + slot + ".\n");
@@ -154,9 +170,8 @@ public class MainGame {
                     WellspringUnlocked = true;
                 else
                     WellspringUnlocked = false;
-                Combat.spells = new String[4];
-                for (int j = 0; j < Combat.spells.length; j++) {
-                    Combat.spells[j] = reader.readLine();
+                for (int j = 0; j < Combat.Spells.size(); j++) {
+                    Combat.Spells.add(reader.readLine());
                 }
             } catch (IOException | NumberFormatException e) {
                 Output.slowPrint("Error loading save slot.\n");
@@ -180,12 +195,12 @@ public class MainGame {
             Output.slowPrint("1. Explore\n");
             Output.slowPrint("2. Stats\n");
             if (godOfSpaceUnlocked) {
-                Output.slowPrint("3. Sanctum Of Reality\n");
+                Output.slowPrint("3. Sanctum Of Reality\n");//Shop pretty much
             } else {
                 Output.slowPrint("3. Locked\n");
             }
             if (WellspringUnlocked) {
-                Output.slowPrint("4. Wellspring Of Souls\n");
+                Output.slowPrint("4. Aether Well\n");//heal, restore mana & resetcooldowns, maybe change later good for now
             } else {
                 Output.slowPrint("4. Locked\n");
             }
@@ -202,7 +217,7 @@ public class MainGame {
                     if (godOfSpaceUnlocked) {
                         SanctumOfReality();
                     } else {
-                        Output.slowPrint("You haven't unlocked this option yet.\n"); 
+                        Output.slowPrint("You don't dare go near such a dangerous place\n"); 
                     }
                     Output.wait(1000);
                     break;
@@ -210,7 +225,7 @@ public class MainGame {
                 if (WellspringUnlocked) {
                     Wellspring();
                 } else {
-                    Output.slowPrint("You haven't unlocked this option yet.\n");
+                    Output.slowPrint("You don't dare go near such a dangerous place\n");
                 }
                     Output.wait(1000);
                     break;
@@ -231,8 +246,8 @@ public class MainGame {
         Output.slowPrint("MP: " + Color.ANSI_BLUE + PlayerStats.mana + Color.ANSI_RESET + "/" + Color.ANSI_BLUE + PlayerStats.maxMana + Color.ANSI_RESET + "\n");
         Output.slowPrint("Life Essence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         Output.slowPrint("Spells:\n");
-        for (int i = 0; i < Combat.spells.length; i++) {
-            Output.slowPrint(Combat.spells[i] + " (Mana Cost: " + Combat.spellCosts[i] + ")\n");
+        for (int i = 0; i < Combat.Spells.size(); i++) {
+            Output.slowPrint(Combat.Spells.get(i) + " (Mana Cost: " + Combat.spellCosts.get(i) + ")\n");
         }
         Output.slowPrint("Press any key to continue...\n");
         Output.scanner.nextLine(); // Output.wait for any key press
@@ -244,20 +259,20 @@ public class MainGame {
         Output.clearScreen();
         // Available dungeons sorted by difficulty
         Output.slowPrint("Available Dungeons:\n");
-        Output.slowPrint("1. Mountain Cave\n"); // maybe improve lore/name
-        Output.slowPrint("2. The First Trial\n"); 
-        Output.slowPrint("3. TestDungeon\n");
+        Output.slowPrint("1. Crumbling Ruins\n"); // maybe improve lore/name
+        Output.slowPrint("2. DungeonTwo\n"); 
+        Output.slowPrint("3. The First Trial\n");
 
         int choice = Output.getUserChoice(1, 3);
         switch (choice) {
             case 1:
-                new beginnersDungeon().explore();
+                new DungeonOne().explore();
                 break;
             case 2:
-                new FirstSpace().explore(); // was extra ; if that somehow changes anything
+                new DungeonTwo().explore(); // was extra ; if that somehow changes anything
                 break;
             case 3:
-                new TestDungeon().explore(); 
+                new FirstSpace().explore(); 
                 break;
         }
     }
@@ -277,15 +292,39 @@ public class MainGame {
         Output.wait(2000);
         Output.slowPrint("Character created!\n");
         Output.wait(1000);
+        Output.clearScreen();
+        IntroLore();
+    
+    }
+
+    public void IntroLore(){//intro lore improve perhaps. 
+        Output.slowPrint("You, " + PlayerStats.playerName + ", are a warlock. Well, you aspire to be a warlock, at least.");
+        Output.wait(4000);
+        Output.clearScreen();
+        Output.slowPrint("However, you can't seem to find a higher being that's willing to form a pact with you."); 
+        Output.wait(4000);
+        Output.clearScreen();
+        Output.slowPrint("Even lesser demons don't dare to waste their time on you."); 
+        Output.wait(3000);
+        Output.clearScreen();
+        Output.slowPrint("Who can blame them? When even the average child surpasses you in magic skill, you seem quite unappealing."); 
+        Output.wait(4000);
+        Output.clearScreen();
+        Output.slowPrint("One day, with nothing better to do, you set out to explore the dungeons of the world."); 
+        Output.wait(4000);
+        Output.clearScreen();
+        Output.slowPrint("Perhaps one day you'll find some kind of " + Color.ANSI_PURPLE + "power " + Color.ANSI_RESET + "to call your own."); 
+        Output.wait(5500);
     }
 
     //-------------------------------------------------------------------------------------------------------------------
     public void Wellspring() {
-        Output.slowPrint(Color.ANSI_BLUE + "You bathe in the blood of gods !\n" + Color.ANSI_RESET);
+        Output.clearScreen();
+        Output.slowPrint(Color.ANSI_BLUE + "You bathe in the ather pool\n" + Color.ANSI_RESET);
         PlayerStats.hp = PlayerStats.maxHp;
         PlayerStats.mana = PlayerStats.maxMana;
-        for (int cool = 0; cool < Combat.spells.length; cool++ ) {
-            Combat.coolDown[cool] = 0;
+        for (int cool = 0; cool < Combat.Spells.size(); cool++ ) {
+            Combat.coolDown.set(cool,0);
         }
         
 
@@ -307,7 +346,8 @@ public class MainGame {
         Output.slowPrint("\n");
         Output.slowPrint("1. Life Essence Absorbtion " + Color.ANSI_GREEN + Price1 + Color.ANSI_RESET + "\n");
         Output.slowPrint("2. Life Essence Conversion " + Color.ANSI_GREEN + Price2 + Color.ANSI_RESET + "\n");
-        Output.slowPrint("3. Exit The Sactum\n");
+        Output.slowPrint("3. Random Lesser Spell\n");//rename
+        Output.slowPrint("4. Exit The Sactum\n");
 
         int choice = Output.getUserChoice(1, 3);
         switch (choice) {
@@ -318,6 +358,12 @@ public class MainGame {
                 buyItem("Mana");
                 break;
             case 3:
+                System.out.println(Combat.Spells);
+                Output.wait(1000000);
+                buyItem("Lesser Spell");
+                
+                break;
+            case 4:
                 // Exit the shop
                 Output.slowPrint("Exiting the Sanctum Of Reality...\n");
                 Output.wait(1000);
@@ -345,6 +391,15 @@ public class MainGame {
                     AmountBoughtMp += 5;
                     Output.slowPrint("Maximum Mana increased by 5! Your soul grows stronger!\n");
                     break;
+                case "LesserSpell"://make this so you can only unlock 3 lesser spells
+                if (PlayerStats.lifeEssence >= 1)
+                if (LesserSpellsUnlocked < 3){
+                LesserSpellsUnlocked ++; 
+                RandomLesserSpell();
+                } else {
+                    Output.slowPrint("You cannot learn more spells of this kind\n");// maybe rewrite
+                    break;
+                }
             }
              // Reduce life essence (cost of purchasing)
             Output.slowPrint("Remaining Life Essence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
@@ -353,7 +408,48 @@ public class MainGame {
         }
     }
     //-------------------------------------------------------------------------------------------------------------------
+    public void RandomLesserSpell(){//make a bunch of lesser spells but you can only unlock 3.   
 
-}
+        int max1 = 4;
+        int min1 = 1;
+        int range1 = max1 - min1 + 1; 
+        int randSpell1 = (int)(Math.random() * range1) + min1;
+
+        if (randSpell1 == 1) {
+            if(Combat.Spells.indexOf("Shockbolt") == -1) {
+                Combat.Spells.add("Shockbolt");
+                Combat.spellCosts.add(5);
+                Combat.coolDown.add(0);
+                System.out.println(Combat.Spells);
+                Output.wait(1000000);
+            } else {
+                RandomLesserSpell();
+            }
+
+        }else if (randSpell1 == 2){
+            RandomLesserSpell();
+        //second spell unlock
+        } else if (randSpell1 == 3){
+            RandomLesserSpell();
+        //third spell unlock
+        } else if (randSpell1 == 4){
+            RandomLesserSpell();
+        //fourth spell unlock
+        }
+        
+
+        }
+        }
+
+
+        //posion spell
+        //Better firebolt spell
+
+
+    //-------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 //Uroxx, Ruler Of the Void

@@ -6,7 +6,7 @@ import MainCode.Monster;
 import MainCode.Output;
 import MainCode.dungeon;
 
-public class FirstSpace extends dungeon {
+public class FirstSpace extends dungeon { //first floor of towering black spire that seems to rise all the way to space, (Maybe how has nobody seen this)
     @Override
     public String getName()
     {return "The First Trial";} //change 
@@ -23,9 +23,11 @@ public class FirstSpace extends dungeon {
 
     @Override
     public void onComplete() {
-        // Unlock the option to pray to the God of Space
-        Output.slowPrint("You feel a connection with the God of Space...\n"); //improve and redo lore
-        Output.slowPrint("The option to pray to the God of Space is now unlocked!\n"); //improve and redo 
+        // Unlock the option to visit sanctum
+        //He grants you a grimoire, replace spells
+
+        Output.slowPrint("You feel a connection with the God of Space...\n"); //Make pact with higher being
+        Output.slowPrint("The option to pray to the God of Space is now unlocked!\n"); //This, THIS IS NO GOD WHATEVER THIS IS SURPASSES ONE
         MainGame.godOfSpaceUnlocked = true;
 
         Output.wait(2000);

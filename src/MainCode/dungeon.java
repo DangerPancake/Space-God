@@ -13,6 +13,7 @@ public class dungeon {
 
     // Explore Beginner's Dungeon
     public void explore() {
+        int e = 0;
         // Dungeon exploration
         Output.slowPrint("Exploring " + getName() + "...\n");
         Output.wait(1000);
@@ -26,7 +27,7 @@ public class dungeon {
                         Output.wait(500);
                         System.out.print("The Monster Appears to be stunned\n");
                     } else {
-                        System.out.print("You are being attacked by a " + monster.getName() + "!\n");
+                        System.out.print("You are being attacked by " + monster.getName() + "!\n");
                     }
 
                     // Player actions
@@ -44,16 +45,26 @@ public class dungeon {
                         case 2:
                             // Flee with 30% chance of success
                             if (MainGame.random.nextInt(100) < 30) {
+                                Output.clearScreen();
                                 Output.slowPrint("You successfully fled from " + monster.getName() + "!\n");
                                 return;
                             } else {
+                                Output.clearScreen();
                                 Output.slowPrint("You failed to flee!\n");
+                                Output.wait(1500);
+                                Output.clearScreen();
                             }
                             break;
                         }
                 
                         // Monster actions
-                    Combat.monsterAttack(monster);
+                    e = Combat.monsterAttack(monster);
+                    if (e == 1) {
+                        break;
+                    }
+                }
+                if (e ==1) {
+                    break;
                 }
                 // Monster defeated
                 if (monster.getHealth() <= 0) {
@@ -70,11 +81,13 @@ public class dungeon {
                 Output.clearScreen();
             }
         }
-        // After defeating all monsters
-        Output.slowPrint("You cleared " + getName() + "!\n");
-        Output.slowPrint("Press any key to continue...\n");
-        Output.scanner.nextLine(); // Output.wait for any key press
-        Output.wait(1000);
-        onComplete();
+        if (e == 0) {
+            // After defeating all monsters
+            Output.slowPrint("You cleared " + getName() + "!\n");
+            Output.slowPrint("Press any key to continue...\n");
+            Output.scanner.nextLine(); // Output.wait for any key press
+            Output.wait(1000);
+            onComplete();
+        }
     }
 }
