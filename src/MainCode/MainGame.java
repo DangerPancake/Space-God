@@ -162,8 +162,7 @@ public class MainGame {
                 else
                     WellspringUnlocked = false;
                 for (int j = 0; j < 50; j++) {
-                    System.out.println(Combat.Spells);
-                    if (Combat.Spells.get(j) != null)
+                    if (Combat.Spells.size() > j)
                         Combat.Spells.set(j,reader.readLine());
                     else
                         Combat.Spells.add(j,reader.readLine());
@@ -246,7 +245,6 @@ public class MainGame {
         Output.slowPrint("Life Essence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         Output.slowPrint("Spells:\n");
         for (int i = 0; i < (Combat.Spells.size() ); i++) {
-            System.out.println(Combat.Spells);
             Output.slowPrint(Combat.Spells.get(i) + " (Mana Cost: " + Combat.spellCosts.get(i) + ")\n");
         }
         Output.slowPrint("Press any key to continue...\n");
@@ -358,8 +356,6 @@ public class MainGame {
                 buyItem("Mana");
                 break;
             case 3:
-                System.out.println(Combat.Spells);
-                Output.wait(1000000);
                 buyItem("Lesser Spell");
                 
                 break;
@@ -420,8 +416,6 @@ public class MainGame {
                 Combat.Spells.add("Shockbolt");
                 Combat.spellCosts.add(5);
                 Combat.coolDown.add(0);
-                System.out.println(Combat.Spells);
-                Output.wait(1000000);
             } else {
                 RandomLesserSpell();
             }
@@ -442,7 +436,6 @@ public class MainGame {
         //posion spell
         //Better firebolt spell
         public void updateSpellCosts() {
-            System.out.println(Combat.Spells);
             for (int i = 0; i < Combat.Spells.size(); i++) {
                 if (Combat.Spells.get(i).equals("Firebolt")) {
                     Combat.spellCosts.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 3);
