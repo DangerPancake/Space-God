@@ -16,7 +16,12 @@ public class Combat {
         add(0);
         
     }}; 
-    public static ArrayList<Integer> coolDown = new ArrayList<Integer>(); 
+    public static ArrayList<Integer> coolDown = new ArrayList<Integer>() {{
+        add(0);
+        add(0);
+        add(0);
+
+    }}; 
     // Monster attacks during combat
     public static int monsterAttack(Monster monster) {
         if (monster.getHealth() <= 0) {

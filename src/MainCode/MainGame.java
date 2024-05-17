@@ -37,15 +37,6 @@ public class MainGame {
 
     // Start the game
     public void startGame() {
-        Combat.coolDown.add(0);
-        Combat.coolDown.add(0);
-        Combat.coolDown.add(0);
-        Combat.Spells.add("Firebolt");
-        Combat.Spells.add("we");
-        Combat.Spells.add("pe");
-        Combat.spellCosts.add(3);
-        Combat.spellCosts.add(5);
-        Combat.spellCosts.add(0);
         while (true) {
             Output.clearScreen();
             // Main menu
@@ -170,8 +161,15 @@ public class MainGame {
                     WellspringUnlocked = true;
                 else
                     WellspringUnlocked = false;
-                for (int j = 0; j < Combat.Spells.size(); j++) {
-                    Combat.Spells.add(reader.readLine());
+                for (int j = 0; j < 50; j++) {
+                    System.out.println(Combat.Spells);
+                    if (Combat.Spells.get(j) != null)
+                        Combat.Spells.set(j,reader.readLine());
+                    else
+                        Combat.Spells.add(j,reader.readLine());
+                } 
+                while (Combat.Spells.indexOf(null) != -1) {
+                    Combat.Spells.remove(Combat.Spells.indexOf(null));
                 }
             } catch (IOException | NumberFormatException e) {
                 Output.slowPrint("Error loading save slot.\n");
@@ -238,6 +236,7 @@ public class MainGame {
 
     // Show player stats
     public void showStats() {
+        updateSpellCosts();
         Output.clearScreen();
         // Player stats
         Output.slowPrint("Player Stats:\n");
@@ -246,7 +245,8 @@ public class MainGame {
         Output.slowPrint("MP: " + Color.ANSI_BLUE + PlayerStats.mana + Color.ANSI_RESET + "/" + Color.ANSI_BLUE + PlayerStats.maxMana + Color.ANSI_RESET + "\n");
         Output.slowPrint("Life Essence: " + Color.ANSI_GREEN + PlayerStats.lifeEssence + Color.ANSI_RESET + "\n");
         Output.slowPrint("Spells:\n");
-        for (int i = 0; i < Combat.Spells.size(); i++) {
+        for (int i = 0; i < (Combat.Spells.size() ); i++) {
+            System.out.println(Combat.Spells);
             Output.slowPrint(Combat.Spells.get(i) + " (Mana Cost: " + Combat.spellCosts.get(i) + ")\n");
         }
         Output.slowPrint("Press any key to continue...\n");
@@ -436,20 +436,34 @@ public class MainGame {
             RandomLesserSpell();
         //fourth spell unlock
         }
+    
+        }
         
-
-        }
-        }
-
-
         //posion spell
         //Better firebolt spell
-
+        public void updateSpellCosts() {
+            System.out.println(Combat.Spells);
+            for (int i = 0; i < Combat.Spells.size(); i++) {
+                if (Combat.Spells.get(i).equals("Firebolt")) {
+                    Combat.spellCosts.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 3);
+                    Combat.coolDown.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 0);
+                } else if (Combat.Spells.get(i).equals("Healing Focus")) {
+                    Combat.spellCosts.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 5);
+                    Combat.coolDown.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 0);
+                } else if (Combat.Spells.get(i).equals("Lesser Focus")) {
+                    Combat.spellCosts.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 0);
+                    Combat.coolDown.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 0);
+                } else if (Combat.Spells.get(i).equals("Scorch Bolt")) {
+                    Combat.spellCosts.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 5);
+                    Combat.coolDown.set(Combat.Spells.indexOf(Combat.Spells.get(i)), 0);
+                }
+            }
+        }
 
     //-------------------------------------------------------------------------------------------------------------------
 
 
 
 
-
+}
 //Uroxx, Ruler Of the Void
